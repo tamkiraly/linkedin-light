@@ -1,4 +1,4 @@
-# linkedin-light
+# LinkedIn Light
 
 A cél egy álláskereső alkalmazás létrehozása.
 A feladatot Java 11 nyelven, Spring framework segítségével valósítsa meg. Az adatbázishoz célszerű
