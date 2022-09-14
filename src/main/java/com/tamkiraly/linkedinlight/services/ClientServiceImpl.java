@@ -29,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
     validateClientName(name);
     validateClientEmail(email);
 
-    return new Client(name, email);
+    return clientRepository.save(new Client(name, email));
   }
 
   private void validateClientName(String name) {
@@ -39,7 +39,7 @@ public class ClientServiceImpl implements ClientService {
   }
 
   private void validateClientEmail(String email) {
-    Pattern pattern = Pattern.compile("^([a-z]([A-Z]))+@([a-z]+.)+[a-z]{2,4}$");
+    Pattern pattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     Matcher matcher = pattern.matcher(email);
     if(!matcher.matches()) {
       throw new EmailFormatException("Please enter a valid e-mail address.");
