@@ -4,6 +4,7 @@ import com.tamkiraly.linkedinlight.dtos.ClientRegistrationRequestDTO;
 import com.tamkiraly.linkedinlight.dtos.ClientRegistrationResponseDTO;
 import com.tamkiraly.linkedinlight.exceptions.EmailAlreadyInUseException;
 import com.tamkiraly.linkedinlight.exceptions.EmailFormatException;
+import com.tamkiraly.linkedinlight.exceptions.InvalidNameException;
 import com.tamkiraly.linkedinlight.models.Client;
 import com.tamkiraly.linkedinlight.repositories.ClientRepository;
 import java.security.InvalidParameterException;
@@ -34,7 +35,7 @@ public class ClientServiceImpl implements ClientService {
 
   private void validateClientName(String name) {
     if(name.length() > 100) {
-      throw new InvalidParameterException("Name should be less than 100 characters.");
+      throw new InvalidNameException("Name should be less than 100 characters.");
     }
   }
 
