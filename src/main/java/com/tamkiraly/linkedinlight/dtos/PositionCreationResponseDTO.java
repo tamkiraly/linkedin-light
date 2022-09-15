@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class PositionCreationResponseDTO {
 
-  private String URL;
+  private String positionUrl;
 
-  public PositionCreationResponseDTO(String URL) {
-    this.URL = URL;
+  public PositionCreationResponseDTO(String positionUrl) {
+    this.positionUrl = positionUrl;
   }
 }

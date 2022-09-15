@@ -7,7 +7,6 @@ import com.tamkiraly.linkedinlight.exceptions.EmailFormatException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidNameException;
 import com.tamkiraly.linkedinlight.models.Client;
 import com.tamkiraly.linkedinlight.repositories.ClientRepository;
-import java.security.InvalidParameterException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class ClientServiceImpl implements ClientService {
   }
 
   private void validateClientName(String name) {
-    if(name.length() > 100) {
+    if (name.length() > 100) {
       throw new InvalidNameException("Name should be less than 100 characters.");
     }
   }
@@ -42,9 +41,9 @@ public class ClientServiceImpl implements ClientService {
   private void validateClientEmail(String email) {
     Pattern pattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     Matcher matcher = pattern.matcher(email);
-    if(!matcher.matches()) {
+    if (!matcher.matches()) {
       throw new EmailFormatException("Please enter a valid e-mail address.");
-    } else if(clientRepository.existsByEmail(email)) {
+    } else if (clientRepository.existsByEmail(email)) {
       throw new EmailAlreadyInUseException("This e-mail address is already in use");
     }
   }
