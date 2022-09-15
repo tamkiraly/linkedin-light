@@ -8,6 +8,6 @@ public class ClientRegistrationResponseDTO {
   private final String apiKey;
 
   public ClientRegistrationResponseDTO(Client client) {
-    this.apiKey = client.getApiKey().toString();
+    this.apiKey = client.getApiKey();
   }
 }
