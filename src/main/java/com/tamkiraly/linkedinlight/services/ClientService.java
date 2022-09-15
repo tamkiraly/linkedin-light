@@ -5,6 +5,8 @@ import com.tamkiraly.linkedinlight.dtos.ClientRegistrationResponseDTO;
 import com.tamkiraly.linkedinlight.models.Client;
 
 public interface ClientService {
+
   Client handleRequestDTO(ClientRegistrationRequestDTO requestDTO);
+
   ClientRegistrationResponseDTO extractAPIKeyFromClient(Client client);
 }
