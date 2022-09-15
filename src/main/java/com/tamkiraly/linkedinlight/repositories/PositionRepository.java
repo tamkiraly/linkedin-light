@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
 
-  @Query("SELECT p FROM Position p WHERE p.name LIKE %:name% AND p.location LIKE :location")
+  @Query("SELECT p FROM Position p WHERE p.positionName LIKE %:name% AND p.positionLocation LIKE :location")
   List<Position> findAllByNameAndLocation(String name, String location);
 }
