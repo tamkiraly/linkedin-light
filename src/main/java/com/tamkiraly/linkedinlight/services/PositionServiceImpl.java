@@ -49,7 +49,7 @@ public class PositionServiceImpl implements PositionService {
 
   private void validateApiKey(String apiKey) {
     UUID uuid = UUID.fromString(apiKey);
-    if(!clientRepository.existsById(uuid)) {
+    if(!clientRepository.existsByApiKey(uuid)) {
       throw new InvalidApiKeyException("API key is invalid.");
     }
   }
