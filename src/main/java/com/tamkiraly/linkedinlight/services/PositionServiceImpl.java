@@ -9,9 +9,7 @@ import com.tamkiraly.linkedinlight.repositories.ClientRepository;
 import com.tamkiraly.linkedinlight.repositories.PositionRepository;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,7 +46,7 @@ public class PositionServiceImpl implements PositionService {
   }
 
   private void validateApiKey(String apiKey) {
-    if(!clientRepository.existsByApiKey(apiKey)) {
+    if (!clientRepository.existsByApiKey(apiKey)) {
       throw new InvalidApiKeyException("API key is invalid.");
     }
   }

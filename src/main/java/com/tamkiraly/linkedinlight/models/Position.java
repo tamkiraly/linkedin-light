@@ -15,15 +15,15 @@ public class Position {
   private Long id;
   private String name;
   private String location;
-  private String URL;
+  private String positionUrl;
 
-  public Position(String name, String location, String URL) {
+  public Position(String name, String location, String positonUrl) {
     this.name = name;
     this.location = location;
-    this.URL = URL;
+    this.positionUrl = positonUrl;
   }
 
-  public String getURL() {
-    return URL;
+  public String getPositionUrl() {
+    return positionUrl;
   }
 }
