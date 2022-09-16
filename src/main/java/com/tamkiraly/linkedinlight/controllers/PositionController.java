@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/position")
 public class PositionController {
 
   private final PositionService positionService;
@@ -23,14 +25,14 @@ public class PositionController {
     this.positionService = positionService;
   }
 
-  @PostMapping("/position")
+  @PostMapping("/")
   public ResponseEntity<?> createNewPosition(@RequestBody PositionCreationRequestDTO requestDTO) {
     Position newPosition = positionService.handlePositionRequestDTO(requestDTO);
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(new PositionCreationResponseDTO(newPosition.getPositionUrl()));
   }
 
-  @GetMapping("/position/search")
+  @GetMapping("/search")
   public ResponseEntity<?> returnPositionListDTO(@RequestBody PositionSearchDTO searchDTO) {
     positionService.validateSearchDTO(searchDTO);
     return ResponseEntity.status(HttpStatus.OK).body(positionService.createPositionUrlDTOList(searchDTO));
