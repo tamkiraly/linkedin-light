@@ -11,7 +11,7 @@ CREATE TABLE position (
                           id                      BIGINT       NOT NULL auto_increment,
                           position_name           VARCHAR(255) NOT NULL,
                           position_location       VARCHAR(255) NOT NULL,
-                          position_url            VARCHAR(255) NOT NULL,
+                          position_url            VARCHAR(255),
                           PRIMARY KEY (id),
                           UNIQUE (id)
 );

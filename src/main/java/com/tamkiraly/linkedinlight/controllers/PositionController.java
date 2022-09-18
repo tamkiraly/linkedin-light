@@ -25,7 +25,8 @@ public class PositionController {
 
   @PostMapping("/position")
   public ResponseEntity<?> createNewPosition(@RequestBody PositionCreationRequestDTO requestDTO) {
-    Position newPosition = positionService.handlePositionRequestDTO(requestDTO);
+    positionService.validatePositionRequestDTO(requestDTO);
+    Position newPosition = positionService.generateUrlForNewPosition(requestDTO);
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(new PositionCreationResponseDTO(newPosition.getPositionUrl()));
   }

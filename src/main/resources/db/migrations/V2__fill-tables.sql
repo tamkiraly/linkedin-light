@@ -11,13 +11,13 @@ INSERT INTO client (id, api_key, client_name, email)
 VALUES (4, '270faa79-7946-454b-9104-31f289aef914', 'Rembrandt Harmenszoon Van Rijn', 'rembrandt@talens.com');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (1, 'Full time stagehand', 'Los Angeles', 'https://linkedinlight.com/jobs/stagehand001010');
+VALUES (1, 'Full time stagehand', 'Los Angeles', 'https://localhost:8080/position/1');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (2, 'C#/.NET developer', 'Silicon Valley', 'https://linkedinlight.com/jobs/csharpdotnetdev0100011');
+VALUES (2, 'C#/.NET developer', 'Silicon Valley', 'https://localhost:8080/position/2');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (3, 'Pit stop mechanic', 'Silverstone', 'https://linkedinlight.com/jobs/pitstopmechanic0000110');
+VALUES (3, 'Pit stop mechanic', 'Silverstone', 'https://localhost:8080/position/3');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (4, 'Painter apprentice', 'Amsterdam', 'https://linkedinlight.com/jobs/apprentice01111100');
+VALUES (4, 'Painter apprentice', 'Amsterdam', 'https://localhost:8080/position/4');
