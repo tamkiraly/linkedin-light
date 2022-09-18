@@ -1,18 +1,23 @@
 package com.tamkiraly.linkedinlight.services;
 
+import com.tamkiraly.linkedinlight.dtos.ClientAPIKeyDTO;
 import com.tamkiraly.linkedinlight.dtos.PositionCreationRequestDTO;
+import com.tamkiraly.linkedinlight.dtos.PositionResponseDTO;
 import com.tamkiraly.linkedinlight.dtos.PositionSearchDTO;
 import com.tamkiraly.linkedinlight.dtos.PositionUrlDTO;
 import com.tamkiraly.linkedinlight.exceptions.InvalidApiKeyException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidLocationNameException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidPositionNameException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidSearchKeywordException;
+import com.tamkiraly.linkedinlight.exceptions.PositionNotFoundException;
 import com.tamkiraly.linkedinlight.models.Position;
 import com.tamkiraly.linkedinlight.repositories.ClientRepository;
 import com.tamkiraly.linkedinlight.repositories.PositionRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -84,5 +89,21 @@ public class PositionServiceImpl implements PositionService {
       urlDtoList.add(new PositionUrlDTO(position.getPositionUrl()));
     }
     return urlDtoList;
+  }
+
+  @Override
+  public void validateAPIKeyDTO(ClientAPIKeyDTO apiKeyDTO) {
+    validateApiKey(apiKeyDTO.getApiKey());
+  }
+
+  @Override
+  public PositionResponseDTO createPositionResponseDTO(Long id) {
+    Optional<Position> position = positionRepository.findById(id);
+    ModelMapper mapper = new ModelMapper();
+    if (position.isEmpty()) {
+      throw new PositionNotFoundException("No position found by the given ID");
+    } else {
+      return mapper.map(position.get(), PositionResponseDTO.class);
+    }
   }
 }
