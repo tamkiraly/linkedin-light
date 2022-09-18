@@ -1,4 +1,4 @@
-package com.tamkiraly.linkedinlight;
+package com.tamkiraly.linkedinlight.configurations;
 
 import com.tamkiraly.linkedinlight.controllers.ClientController;
 import com.tamkiraly.linkedinlight.controllers.PositionController;
