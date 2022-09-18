@@ -34,7 +34,7 @@ public class SwaggerConfig {
   private ApiInfo createAPIInfo() {
     return new ApiInfo(
         "LinkedIn Light",
-        "Job searching application for Bredex GMBH.",
+        "Job searching application for Bredex GmbH.",
         "v1.0.1",
         "https://en.wikipedia.org/wiki/Terms_of_service",
         new Contact("Tamás Király", "https://github.com/tamkiraly", "tamaskiraly90@gmail.com"),
