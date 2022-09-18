@@ -1,5 +1,6 @@
 package com.tamkiraly.linkedinlight.controllers;
 
+import com.tamkiraly.linkedinlight.dtos.ClientAPIKeyDTO;
 import com.tamkiraly.linkedinlight.dtos.PositionCreationRequestDTO;
 import com.tamkiraly.linkedinlight.dtos.PositionCreationResponseDTO;
 import com.tamkiraly.linkedinlight.dtos.PositionSearchDTO;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,5 +37,11 @@ public class PositionController {
   public ResponseEntity<?> returnPositionListDTO(@RequestBody PositionSearchDTO searchDTO) {
     positionService.validateSearchDTO(searchDTO);
     return ResponseEntity.status(HttpStatus.OK).body(positionService.createPositionUrlDTOList(searchDTO));
+  }
+
+  @GetMapping("/position/{id}")
+  public ResponseEntity<?> displaySearchResult(@PathVariable Long id, @RequestBody ClientAPIKeyDTO apiKeyDTO) {
+    positionService.validateAPIKeyDTO(apiKeyDTO);
+    return ResponseEntity.status(HttpStatus.OK).body(positionService.createPositionResponseDTO(id));
   }
 }

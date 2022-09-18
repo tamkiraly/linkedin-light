@@ -11,13 +11,13 @@ INSERT INTO client (id, api_key, client_name, email)
 VALUES (4, '270faa79-7946-454b-9104-31f289aef914', 'Rembrandt Harmenszoon Van Rijn', 'rembrandt@talens.com');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (1, 'Full time stagehand', 'Los Angeles', 'https://localhost:8080/position/1');
+VALUES (1, 'Full time stagehand', 'Los Angeles', 'http://localhost:8080/position/1');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (2, 'C#/.NET developer', 'Silicon Valley', 'https://localhost:8080/position/2');
+VALUES (2, 'C#/.NET developer', 'Silicon Valley', 'http://localhost:8080/position/2');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (3, 'Pit stop mechanic', 'Silverstone', 'https://localhost:8080/position/3');
+VALUES (3, 'Pit stop mechanic', 'Silverstone', 'http://localhost:8080/position/3');
 
 INSERT INTO position (id, position_name, position_location, position_url)
-VALUES (4, 'Painter apprentice', 'Amsterdam', 'https://localhost:8080/position/4');
+VALUES (4, 'Painter apprentice', 'Amsterdam', 'http://localhost:8080/position/4');
