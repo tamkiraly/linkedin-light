@@ -5,6 +5,7 @@ import com.tamkiraly.linkedinlight.dtos.ClientRegistrationResponseDTO;
 import com.tamkiraly.linkedinlight.exceptions.EmailAlreadyInUseException;
 import com.tamkiraly.linkedinlight.exceptions.EmailFormatException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidNameException;
+import com.tamkiraly.linkedinlight.exceptions.InvalidParameterException;
 import com.tamkiraly.linkedinlight.models.Client;
 import com.tamkiraly.linkedinlight.repositories.ClientRepository;
 import java.util.regex.Matcher;
@@ -24,21 +25,25 @@ public class ClientServiceImpl implements ClientService {
 
   @Override
   public Client handleRequestDTO(ClientRegistrationRequestDTO requestDTO) {
-    String name = requestDTO.getName();
-    String email = requestDTO.getEmail();
-    validateClientName(name);
-    validateClientEmail(email);
-
-    return clientRepository.save(new Client(name, email));
+      String name = requestDTO.getName();
+      String email = requestDTO.getEmail();
+      validateClientName(name);
+      validateClientEmail(email);
+      return clientRepository.save(new Client(name, email));
   }
 
   private void validateClientName(String name) {
-    if (name.length() > 100) {
+    if (name == null || name.isBlank()) {
+      throw new InvalidNameException("Please provide a name.");
+    } else if (name.length() > 100) {
       throw new InvalidNameException("Name should be less than 100 characters.");
     }
   }
 
   private void validateClientEmail(String email) {
+    if (email == null || email.isBlank()) {
+      throw new InvalidParameterException("Please provide an e-mail address.");
+    }
     Pattern pattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     Matcher matcher = pattern.matcher(email);
     if (!matcher.matches()) {
