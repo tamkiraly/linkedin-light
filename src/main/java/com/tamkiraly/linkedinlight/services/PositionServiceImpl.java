@@ -10,9 +10,7 @@ import com.tamkiraly.linkedinlight.exceptions.InvalidSearchKeywordException;
 import com.tamkiraly.linkedinlight.models.Position;
 import com.tamkiraly.linkedinlight.repositories.ClientRepository;
 import com.tamkiraly.linkedinlight.repositories.PositionRepository;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,19 +22,17 @@ public class PositionServiceImpl implements PositionService {
   private final PositionRepository positionRepository;
   private final ClientRepository clientRepository;
 
-  //region handlePositionRequestDTO
   @Override
-  public Position handlePositionRequestDTO(PositionCreationRequestDTO requestDTO) {
-    String positionName = requestDTO.getPositionName();
-    String positionLocation = requestDTO.getPositionLocation();
-    String apiKey = requestDTO.getApiKey();
+  public void validatePositionRequestDTO(PositionCreationRequestDTO requestDTO) {
+    validateApiKey(requestDTO.getApiKey());
+    validatePositionName(requestDTO.getPositionName());
+    validatePositionLocation(requestDTO.getPositionLocation());
+  }
 
-    validateApiKey(apiKey);
-    validatePositionName(positionName);
-    validatePositionLocation(positionLocation);
-
-    return positionRepository.save(
-        new Position(positionName, positionLocation, generateURL(positionName, apiKey)));
+  private void validateApiKey(String apiKey) {
+    if (!clientRepository.existsByApiKey(apiKey)) {
+      throw new InvalidApiKeyException("API key is invalid.");
+    }
   }
 
   private void validatePositionName(String positionName) {
@@ -51,19 +47,13 @@ public class PositionServiceImpl implements PositionService {
     }
   }
 
-  private void validateApiKey(String apiKey) {
-    if (!clientRepository.existsByApiKey(apiKey)) {
-      throw new InvalidApiKeyException("API key is invalid.");
-    }
+  @Override
+  public Position generateUrlForNewPosition(PositionCreationRequestDTO requestDTO) {
+    Position newPosition = positionRepository.save(
+        new Position(requestDTO.getPositionName(), requestDTO.getPositionLocation()));
+    newPosition.setPositionUrl();
+    return positionRepository.save(newPosition);
   }
-
-  private String generateURL(String positionName, String apiKey) {
-    String concatNameAndKey = positionName + apiKey;
-    String encodedNameAndKey = Base64.getEncoder().encodeToString(concatNameAndKey.getBytes(StandardCharsets.UTF_8));
-    return "https://linkedinlight.com/position/" + encodedNameAndKey;
-  }
-  //endregion
-
 
   @Override
   public void validateSearchDTO(PositionSearchDTO searchDTO) {

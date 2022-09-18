@@ -21,9 +21,12 @@ public class Position {
   private String positionLocation;
   private String positionUrl;
 
-  public Position(String name, String positionLocation, String positionUrl) {
+  public Position(String name, String positionLocation) {
     this.positionName = name;
     this.positionLocation = positionLocation;
-    this.positionUrl = positionUrl;
+  }
+
+  public void setPositionUrl() {
+    this.positionUrl = "http://localhost:8080/position/" + this.getId();
   }
 }

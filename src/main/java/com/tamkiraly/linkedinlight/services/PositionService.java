@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface PositionService {
 
-  Position handlePositionRequestDTO(PositionCreationRequestDTO requestDTO);
+  void validatePositionRequestDTO(PositionCreationRequestDTO requestDTO);
+
+  Position generateUrlForNewPosition(PositionCreationRequestDTO requestDTO);
 
   void validateSearchDTO(PositionSearchDTO searchDTO);
 
