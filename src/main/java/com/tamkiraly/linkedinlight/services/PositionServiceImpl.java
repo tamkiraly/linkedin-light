@@ -7,6 +7,7 @@ import com.tamkiraly.linkedinlight.dtos.PositionSearchDTO;
 import com.tamkiraly.linkedinlight.dtos.PositionUrlDTO;
 import com.tamkiraly.linkedinlight.exceptions.InvalidApiKeyException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidLocationNameException;
+import com.tamkiraly.linkedinlight.exceptions.InvalidParameterException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidPositionNameException;
 import com.tamkiraly.linkedinlight.exceptions.InvalidSearchKeywordException;
 import com.tamkiraly.linkedinlight.exceptions.PositionNotFoundException;
@@ -35,19 +36,25 @@ public class PositionServiceImpl implements PositionService {
   }
 
   private void validateApiKey(String apiKey) {
-    if (!clientRepository.existsByApiKey(apiKey)) {
+    if (apiKey == null || apiKey.isBlank()) {
+      throw new InvalidParameterException("Please provide a valid API key.");
+    } else if (!clientRepository.existsByApiKey(apiKey)) {
       throw new InvalidApiKeyException("API key is invalid.");
     }
   }
 
   private void validatePositionName(String positionName) {
-    if (positionName.length() > 50) {
+    if (positionName == null || positionName.isBlank()) {
+      throw new InvalidParameterException("Please provide a name for the position.");
+    } else if (positionName.length() > 50) {
       throw new InvalidPositionNameException("Position's name should not be longer than 50 characters");
     }
   }
 
   private void validatePositionLocation(String positionLocation) {
-    if (positionLocation.length() > 50) {
+    if (positionLocation == null || positionLocation.isBlank()) {
+      throw new InvalidParameterException("Please provide the name of the location.");
+    } else if (positionLocation.length() > 50) {
       throw new InvalidLocationNameException("Location's name should not be longer than 50 characters");
     }
   }
@@ -68,7 +75,9 @@ public class PositionServiceImpl implements PositionService {
   }
 
   private void validateKeyword(String keyword) {
-    if (keyword.length() > 50) {
+    if (keyword == null || keyword.isBlank()) {
+      throw new InvalidParameterException("Please provide a keyword.");
+    } else if (keyword.length() > 50) {
       throw new InvalidSearchKeywordException("Keyword should be less than 50 characters.");
     }
   }
@@ -76,7 +85,11 @@ public class PositionServiceImpl implements PositionService {
   @Override
   public List<PositionUrlDTO> createPositionUrlDTOList(PositionSearchDTO searchDTO) {
     List<Position> positionList = findPositionsByNameAndLocation(searchDTO);
-    return createDTOListFromPositionList(positionList);
+    if (positionList.isEmpty()) {
+      throw new PositionNotFoundException("No results matching the given parameters.");
+    } else {
+      return createDTOListFromPositionList(positionList);
+    }
   }
 
   private List<Position> findPositionsByNameAndLocation(PositionSearchDTO searchDTO) {

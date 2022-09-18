@@ -25,11 +25,11 @@ public class ClientServiceImpl implements ClientService {
 
   @Override
   public Client handleRequestDTO(ClientRegistrationRequestDTO requestDTO) {
-      String name = requestDTO.getName();
-      String email = requestDTO.getEmail();
-      validateClientName(name);
-      validateClientEmail(email);
-      return clientRepository.save(new Client(name, email));
+    String name = requestDTO.getName();
+    String email = requestDTO.getEmail();
+    validateClientName(name);
+    validateClientEmail(email);
+    return clientRepository.save(new Client(name, email));
   }
 
   private void validateClientName(String name) {
