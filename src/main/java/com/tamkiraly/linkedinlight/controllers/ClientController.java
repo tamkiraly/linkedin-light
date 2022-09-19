@@ -20,7 +20,7 @@ public class ClientController {
 
   @PostMapping("/client")
   @ApiOperation(value = "Registers a new client in the database, returns an API key",
-      notes = "Provide name and email in JSON format",
+      notes = "Provide name (max. 100 characters) and email (e.g.: 'example@email.com')",
       response = ClientRegistrationResponseDTO.class)
   public ResponseEntity<?> registerNewClient(@RequestBody ClientRegistrationRequestDTO requestDTO) {
     Client newClient = clientService.handleRequestDTO(requestDTO);
