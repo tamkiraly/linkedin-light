@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "position")
 @NoArgsConstructor
 @Getter
+@Setter
 public class Position {
 
   @Id
